@@ -1,5 +1,12 @@
 @extends('layout.index')
+@section('title', 'List Product')
 @section('content')
+
+<!-- DataTables -->
+<link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+<!-- Theme style -->
 
     <div class="row mb-2">
         <div class="col-sm-6">
@@ -33,7 +40,6 @@
                                             <td>Product Name</td>
                                             <td>Brand</td>
                                             <td>Price</td>
-                                            <td width="200px">Product Description</td>
                                             <td width="200px">action</td>
                                         </tr>
                                     </thead>
@@ -55,37 +61,69 @@
 
 
     {{-- datatables --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
+    <!-- DataTables  & Plugins -->
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
     <script>
-        $(document).ready(function() {
-            $('#datatable').DataTable({
-                processing: true,
-                serverside: true,
-                responsive: true,
-                ajax: "{{route('get.product')}}",
-                columns: [{
-                        data: 'product_name',
-                        name: 'product_name'
-                    },
-                    {
-                        data: 'product_brand',
-                        name: 'product_brand'
-                    },
-                    {
-                        data: 'product_price',
-                        name: 'product_price'
-                    },
-                    {
-                        data: 'product_description',
-                        name: 'product_description'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action'
-                    },
-                ]
-            });
-        });
+        $(function () {
+        $("#datatable").DataTable({
+            processing: true,
+            serverside: true,
+            responsive: true,
+            deferLoading: [ 57, 100 ],
+            autoWidth:true,
+            buttons: [
+                        {
+                            extend: 'pdf',
+                            footer: true,
+                            className: 'btnPrint',
+                            exportOptions: {
+                                    columns: [0,1,2,3]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            footer: true,
+                            className: 'btnPrint',
+                            exportOptions: {
+                                    columns: [0,1,2,3]
+                            }
+                        },
+                    ],
+            dom: 'Bfrtip',
+            ajax: "{{route('get.product')}}",
+                    columns: [{
+                            data: 'product_name',
+                            name: 'product_name'
+                        },
+                        {
+                            data: 'product_brand',
+                            name: 'product_brand'
+                        },
+                        {
+                            data: 'product_price',
+                            name: 'product_price'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action'
+                        },
+                    ]
+        })
+       });
     </script>
+
 @endsection

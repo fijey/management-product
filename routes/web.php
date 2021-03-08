@@ -21,7 +21,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('dashboard','\App\Http\Controllers\DashboardController')->only(['index']);
-    Route::resource('product','\App\Http\Controllers\ProductController');
+    Route::resource('product','\App\Http\Controllers\ProductController')->except('destroy');
+    Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/getproduct', [ProductController::class, 'getproduct'])->name('get.product');
 });
 
