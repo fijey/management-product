@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RequestRegister;
+use App\Http\Requests\RequestLogin;
 use App\Models\User;
+use Auth;
 class AuthController extends Controller
 {
     /**
@@ -49,9 +51,15 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestLogin $request)
     {
-        //
+        if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
+            
+            return redirect('/dashboard');
+       }
+
+       return redirect('/login')->with('statusLogin', 'Email/Katasandi Salah');
+
     }
 
     /**
@@ -94,8 +102,10 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+       Auth::logout();
+    
+        return redirect('/login');
     }
 }

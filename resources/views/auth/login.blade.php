@@ -24,23 +24,30 @@
     <div class="card-body">
       <p class="login-box-msg">Sign in to open dashboard</p>
 
-      <form action="/index3.html" method="post">
+      <form action="/login" method="post">
+        @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input name="email" value="{{old('email')}}" type="email" class="form-control {{$errors->has('email') ?  'is-invalid' : ''}}" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
+        @if ($errors->has('email'))
+        <span class="text-danger">{{ $errors->first('email') }}</span>
+        @endif
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input name="password" type="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" placeholder="Password ">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+        @if ($errors->has('password'))
+        <span class="text-danger">{{ $errors->first('password') }}</span>
+        @endif
         <div class="row">
           <div class="col-8">
            

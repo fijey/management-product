@@ -26,5 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'store']);
 Route::get('/register' , [AuthController::class,'register']);
 Route::post('/register' , [AuthController::class,'registerstore']);
+Route::get('/logout' , [AuthController::class,'destroy']);
