@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('dashboard','\App\Http\Controllers\DashboardController')->only([
-        'index'
-    ]);
+    Route::resource('dashboard','\App\Http\Controllers\DashboardController')->only(['index']);
+    Route::resource('product','\App\Http\Controllers\ProductController');
+    Route::get('/getproduct', [ProductController::class, 'getproduct'])->name('get.product');
 });
-
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'store']);
