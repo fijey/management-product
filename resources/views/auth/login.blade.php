@@ -16,6 +16,23 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+  @if (session('success'))
+  <div class="card card-success">
+    <div class="card-header">
+      <h3 class="card-title">Success</h3>
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+        </button>
+      </div>
+      <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      {{session('success')}}
+    </div>
+    <!-- /.card-body -->
+  </div>
+  @endif
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
@@ -23,6 +40,7 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to open dashboard</p>
+
 
       <form action="/login" method="post">
         @csrf

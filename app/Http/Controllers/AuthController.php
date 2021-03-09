@@ -30,7 +30,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->update();
 
-        return redirect('/login')->with('message', 'Registered Success');
+        return redirect('/login')->with('success', 'Registered Success');
         
 
     }
