@@ -14,4 +14,8 @@ class Product extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function salesorder(){
+        return $this->hashOne(SalesOrder::class);
+    }
 }

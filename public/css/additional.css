@@ -18,3 +18,7 @@ table.dataTable thead .sorting:after {
     opacity: .2;
     content: "";
 }
+
+.nav-sidebar .nav-link:hover {
+    padding-left: 10px;
+}

@@ -1,5 +1,5 @@
 @extends('layout.index')
-@section('title', 'List Customer')
+@section('title', 'Sales Order')
 @section('content')
 
 <!-- DataTables -->
@@ -8,16 +8,16 @@
 
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Customer List</h1>
+            <h1 class="m-0">Sales Order List</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Customer List</li>
+            <li class="breadcrumb-item active">Sales Order List</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
-    <a href="/customer/create" class="btn btn-outline-primary mb-3"> Add Customer </a>
+    <a href="/sales-order/create" class="btn btn-outline-primary mb-3"> Add Sales Order </a>
 
     <style>
         .table-list td {
@@ -33,15 +33,13 @@
                         <div class="card" style="overflow-x: scroll;">
                             <div class="card-body">
                                 <table class="table table-striped table-bordered " id="datatable">
-                                    <thead class="bg-primary text-white">
+                                    <thead class="thead-primary bg-primary text-white">
                                         <tr>
-                                            <td>Name</td>
-                                            <td>Email</td>
-                                            <td>Address</td>
-                                            <td>Post Code</td>
-                                            <td>City</td>
-                                            <td>Phone</td>
-                                            <td>Identity Number</td>
+                                            <td>Product Name</td>
+                                            <td>Brand</td>
+                                            <td>Price</td>
+                                            <td>Customer Name</td>
+                                            <td>Customer Email</td>
                                             <td width="200px">action</td>
                                         </tr>
                                     </thead>
@@ -103,9 +101,19 @@
                         },
                     ],
             dom: 'Bfrtip',
-            ajax: "{{route('get.customer')}}",
-                    columns: [
-                        
+            ajax: "{{route('get.salesorder')}}",
+                    columns: [{
+                            data: 'product_name',
+                            name: 'product_name'
+                        },
+                        {
+                            data: 'product_brand',
+                            name: 'product_brand'
+                        },
+                        {
+                            data: 'product_price',
+                            name: 'product_price'
+                        },
                         {
                             data: 'customer_name',
                             name: 'customer_name'
@@ -113,26 +121,6 @@
                         {
                             data: 'customer_email',
                             name: 'customer_email'
-                        },
-                        {
-                            data: 'customer_address',
-                            name: 'customer_address'
-                        },
-                        {
-                            data: 'customer_city',
-                            name: 'customer_city'
-                        },
-                        {
-                            data: 'customer_postal_code',
-                            name: 'customer_postal_code'
-                        },
-                        {
-                            data: 'customer_phone',
-                            name: 'customer_phone'
-                        },
-                        {
-                            data: 'customer_identity_no',
-                            name: 'customer_identity_no'
                         },
                         {
                             data: 'action',

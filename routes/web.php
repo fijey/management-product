@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SalesOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('customer','\App\Http\Controllers\CustomerController')->except('destroy');
     Route::get('customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
     Route::get('/getcustomer', [CustomerController::class, 'getcustomer'])->name('get.customer');
+   
+    //Sales Order
+    Route::resource('sales-order','\App\Http\Controllers\SalesOrderController')->except('destroy');
+    Route::get('sales-order/delete/{id}', [SalesOrderController::class, 'destroy'])->name('sales-order.destroy');
+    Route::get('/getsalesorder', [SalesOrderController::class, 'getsalesorder'])->name('get.salesorder');
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
