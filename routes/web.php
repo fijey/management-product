@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('dashboard','\App\Http\Controllers\DashboardController')->only(['index']);
+    //brand
+    Route::resource('brand','\App\Http\Controllers\BrandController')->except('destroy');
+    Route::get('brand/delete/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+    Route::get('/getbrand', [BrandController::class, 'getbrand'])->name('get.brand');
+    //product
     Route::resource('product','\App\Http\Controllers\ProductController')->except('destroy');
     Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/getproduct', [ProductController::class, 'getproduct'])->name('get.product');

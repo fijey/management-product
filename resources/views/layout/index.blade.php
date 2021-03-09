@@ -171,6 +171,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/brand" class="nav-link">
+              <i class="nav-icon fa fa-list-alt"></i>
+              <p>
+                Managememnt Brand
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
   
         </ul>
       </nav>

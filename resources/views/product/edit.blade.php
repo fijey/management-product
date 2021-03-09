@@ -9,13 +9,13 @@
 
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Product Create</h1>
+            <h1 class="m-0">Product Edit</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
             <li class="breadcrumb-item"><a href="/product">Product List</a></li>
-            <li class="breadcrumb-item active">Product Create</li>
+            <li class="breadcrumb-item active">Product Edit</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -26,11 +26,12 @@
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Add Product</h3>
+              <h3 class="card-title">Edit Product</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/product" method="post">
+            <form action="/product/{{$product->product_id}}" method="post">
+              @method('put')
                 @csrf
               <div class="card-body">
                 <div class="form-group">
@@ -38,14 +39,14 @@
                   @if ($errors->has('product_name'))
                   <div class="text-danger">*{{ $errors->first('product_name') }}</div>
                   @endif
-                  <input type="text" name="product_name" value="{{old('product_name')}}" class="form-control {{$errors->has('product_name') ? 'is-invalid' : ''}}" id="product_name" placeholder="Enter Product Name">
+                  <input type="text" name="product_name" value="{{$product->product_name}}" class="form-control {{$errors->has('product_name') ? 'is-invalid' : ''}}" id="product_name" placeholder="Enter Product Name">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Product Price</label>
                   @if ($errors->has('product_price'))
                   <div class="text-danger">*{{ $errors->first('product_price') }}</div>
                   @endif
-                  <input type="number" name="product_price" value="{{old('product_price')}}" class="form-control {{$errors->has('product_name') ? 'is-invalid' : ''}}" id="product_name" placeholder="Enter Product Price">
+                  <input type="number" name="product_price" value="{{$product->product_price}}" class="form-control {{$errors->has('product_name') ? 'is-invalid' : ''}}" id="product_name" placeholder="Enter Product Price">
                 </div>
                 
                 <div class="form-group">
@@ -55,13 +56,12 @@
                     @endif
                     <select name="product_brand" class="form-control select2bs4 {{$errors->has('product_brand') ? 'is-invalid' : ''}}" style="width: 100%;">
                       @forelse ($brand as $item)
-                      <option value="{{$item->brand_id}}">{{$item->brand_name}}</option>
-                          
+                      <option value="{{$item->brand_id}}" {{$item->brand_id == $product->product_brand ? 'selected' : ''}}>{{$item->brand_name}}</option>
                       @empty
-                      <option disabled>Belum ada Data</option>
+                          
                       @endforelse
                     </select>
-                    <a href="/brand" class=" mt-2 btn btn-sm btn-primary">Add Brand</a>
+                    <a href="/managementbrand" class=" mt-2 btn btn-sm btn-primary">Add Brand</a>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">Add Picture</label>
@@ -83,7 +83,7 @@
                     @if ($errors->has('product_description'))
                     <div class="text-danger">*{{ $errors->first('product_description') }}</div>
                     @endif
-                    <textarea name="product_description" class="form-control" id="summernote" placeholder="Enter Product Description">{{old('product_description')}}</textarea>
+                    <textarea name="product_description" class="form-control" id="summernote" placeholder="Enter Product Description">{{$product->product_description}}</textarea>
                   </div>
               </div>
               <!-- /.card-body -->

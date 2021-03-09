@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Brand;
 use App\Http\Requests\RequestCreateProduct;
+use App\Http\Requests\RequestUpdateProduct;
 
 class ProductController extends Controller
 {
@@ -24,7 +26,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $brand = Brand::all();
+        $data = [
+            'brand' => $brand
+        ];
+        return view('product.create', $data);
     }
 
     /**
@@ -70,7 +76,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id)->where('product_id', $id)->first();
+        $brand = Brand::all();
+        $data = [
+            'product'=> $product,
+            'brand'=> $brand
+        ];
+
+        return view('product.edit', $data);
     }
 
     /**
@@ -80,9 +93,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RequestUpdateProduct $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->update($request->validated());
+
+        return redirect('/product')->with('success', 'Product Has been Updated');   
     }
 
     /**
@@ -103,7 +119,7 @@ class ProductController extends Controller
 
         return \DataTables::eloquent($data)
         ->addColumn('action', function($s) {
-            return '<a href="'.route('product.show',$s->product_id).'" class="btn btn-warning">
+            return '<a href="'.route('product.show',$s->product_id.'/edit').'" class="btn btn-warning">
             <i class="fas fa-fw fa-edit"></i></a> <a href="'.route('product.destroy',$s->product_id).'" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>';
         })
         ->rawColumns(['action'])
