@@ -96,7 +96,14 @@ class SalesOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sales = SalesOrder::find($id);
+        $sales->customer_id = $request->customer_id;
+        $sales->product_id = $request->product_id;
+        $sales->update();
+
+        return redirect('/sales-order')->with('success', 'Successfully Updated');
+
+
     }
 
     /**
@@ -107,7 +114,10 @@ class SalesOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sales = SalesOrder::find($id);
+        $sales->delete();
+
+        return redirect('/sales-order')->with('success', 'Successfully Deleted');
     }
 
     public function getsalesorder() {
@@ -118,7 +128,7 @@ class SalesOrderController extends Controller
 
         return \DataTables::eloquent($data)
         ->addColumn('action', function($s) {
-            return '<a href="'.route('sales-order.show',$s->order_id.'/edit').'" class="btn btn-warning">
+            return '<a href="'.route('sales-order.edit',$s->order_id).'" class="btn btn-warning">
             <i class="fas fa-fw fa-edit"></i></a> <a href="'.route('sales-order.destroy',$s->order_id).'" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>';
         })
         ->rawColumns(['action'])

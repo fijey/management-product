@@ -30,7 +30,8 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/sales-order" method="post">
+            <form action="/sales-order/{{$data->order_id}}" method="post">
+              @method('put')
                 @csrf
               <div class="card-body">
 

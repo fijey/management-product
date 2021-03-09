@@ -39,7 +39,7 @@ class BrandController extends Controller
     {
         $product = Brand::create($request->validated());
 
-        return redirect('/brand')->with('message', 'Product Added Successfully');
+        return redirect('/brand')->with('success', 'Product Added Successfully');
     }
 
     /**

@@ -54,7 +54,7 @@ class ProductController extends Controller
 		}
 
 
-        return redirect('/product')->with('message', 'Product Added Successfully');
+        return redirect('/product')->with('success', 'Product Added Successfully');
     }
 
     /**
@@ -111,7 +111,7 @@ class ProductController extends Controller
     {
         $product=Product::find($id);
         $product->delete();
-        return redirect('/product')->with('message', 'Product Deleted Successfully');
+        return redirect('/product')->with('success', 'Product Deleted Successfully');
     }
 
     public function getProduct() {

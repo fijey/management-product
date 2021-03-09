@@ -102,7 +102,7 @@ class CustomerController extends Controller
     {
         $customer=Customer::find($id);
         $customer->delete();
-        return redirect('/customer')->with('message', 'Customer Deleted Successfully');
+        return redirect('/customer')->with('success', 'Customer Deleted Successfully');
     }
 
     public function getcustomer() {

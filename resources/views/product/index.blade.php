@@ -18,6 +18,23 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
     <a href="/product/create" class="btn btn-outline-primary mb-3"> Add Product </a>
+     @if (session('success'))
+        <div class="card card-success">
+            <div class="card-header">
+            <h3 class="card-title">Success</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                </button>
+            </div>
+            <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            {{session('success')}}
+            </div>
+            <!-- /.card-body -->
+        </div>
+  @endif
 
     <style>
         .table-list td {
