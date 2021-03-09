@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
-  <link rel="stylesheet" href="{{asset('css/additional.css')}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -180,6 +179,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/customer" class="nav-link">
+              <i class="nav-icon fa fa-list-alt"></i>
+              <p>
+                List Customer
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
   
         </ul>
       </nav>
@@ -244,5 +252,6 @@
 <script src="{{asset('plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
+<link rel="stylesheet" href="{{asset('css/additional.css')}}">
 </body>
 </html>

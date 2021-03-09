@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('product','\App\Http\Controllers\ProductController')->except('destroy');
     Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/getproduct', [ProductController::class, 'getproduct'])->name('get.product');
+
+    //Customer
+    Route::resource('customer','\App\Http\Controllers\CustomerController')->except('destroy');
+    Route::get('customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::get('/getcustomer', [CustomerController::class, 'getcustomer'])->name('get.customer');
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');

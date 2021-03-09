@@ -1,5 +1,5 @@
 @extends('layout.index')
-@section('title', 'List Brand')
+@section('title', 'List Customer')
 @section('content')
 
 <!-- DataTables -->
@@ -8,16 +8,16 @@
 
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Brand List</h1>
+            <h1 class="m-0">Customer List</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Brand List</li>
+            <li class="breadcrumb-item active">Customer List</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
-    <a href="/brand/create" class="btn btn-outline-primary mb-3"> Add Brand </a>
+    <a href="/customer/create" class="btn btn-outline-primary mb-3"> Add Customer </a>
 
     <style>
         .table-list td {
@@ -33,10 +33,15 @@
                         <div class="card" style="overflow-x: scroll;">
                             <div class="card-body">
                                 <table class="table table-striped table-bordered " id="datatable">
-                                    <thead class="thead-primary bg-primary text-white">
+                                    <thead class="bg-primary text-white">
                                         <tr>
-                                            <td>Brand Name</td>
-                                            <td>Created At</td>
+                                            <td>Name</td>
+                                            <td>Email</td>
+                                            <td>Address</td>
+                                            <td>Post Code</td>
+                                            <td>City</td>
+                                            <td>Phone</td>
+                                            <td>Identity Number</td>
                                             <td width="200px">action</td>
                                         </tr>
                                     </thead>
@@ -71,10 +76,7 @@
     <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
-    <!-- Moment.js: -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
-    <script>    
+    <script>
         $(function () {
         $("#datatable").DataTable({
             processing: true,
@@ -101,19 +103,35 @@
                         },
                     ],
             dom: 'Bfrtip',
-            ajax: "{{route('get.brand')}}",
+            ajax: "{{route('get.customer')}}",
                     columns: [{
-                            data: 'brand_name',
-                            name: 'brand_name'
+                            data: 'customer_name',
+                            name: 'customer_name'
                         },
                         {
-                            name: 'created_at.timestamp',
-                            data: {
-                                _: 'created_at.display',
-                                sort: 'created_at.timestamp'
-                            }
+                            data: 'customer_email',
+                            name: 'customer_email'
                         },
-                       
+                        {
+                            data: 'customer_address',
+                            name: 'customer_address'
+                        },
+                        {
+                            data: 'customer_city',
+                            name: 'customer_city'
+                        },
+                        {
+                            data: 'customer_postal_code',
+                            name: 'customer_postal_code'
+                        },
+                        {
+                            data: 'customer_phone',
+                            name: 'customer_phone'
+                        },
+                        {
+                            data: 'customer_identity_no',
+                            name: 'customer_identity_no'
+                        },
                         {
                             data: 'action',
                             name: 'action'
